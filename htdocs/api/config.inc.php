@@ -3,7 +3,7 @@
 // #################################################################################
 // Database Settting
 $DB_TYPE        = 'mysqli';
-$DB_HOST        = 'localhost:3386';
+$DB_HOST        = 'localhost:3387';
 $DB_USERNAME    = 'root';
 $DB_PASSWORD    = '6jF0^#12x6^S2zQ#t';
 $DB_DATABASE    = 'myedu';

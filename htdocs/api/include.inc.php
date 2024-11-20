@@ -32,7 +32,7 @@ $ExceptCsrf[] = "/api/apps/apps_384.php"; //学生心理测评记录
 $ExceptCsrf[] = "/api/apps/apps_385.php"; //开始学生心理测评
 
 function __($Value) {
-	global $MAP;	
+	global $MAP;
 	if($MAP[$Value]!="") {
 		$Value = $MAP[$Value];
 	}
@@ -80,7 +80,7 @@ function DecryptID($data) {
 }
 
 function EncryptApiData($JSON) {
-	if($_SERVER['HTTP_HOST'] == "localhost" && $_SERVER['HTTP_HOST'] == "127.0.0.1")  {
+	if($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "127.0.0.1")  {
 		return json_encode($JSON);
 	}
 	else {
@@ -156,7 +156,7 @@ function ForSqlInjection($str) 			{
 	$str  = str_replace("'","",$str);
 	$str  = str_replace('"',"",$str);
 	$str  = str_replace('--',"",$str);
-	
+
 	$str  = str_replace('create table ',"",$str);
 	$str  = str_replace('drop table ',"",$str);
 	$str  = str_replace('drop database ',"",$str);
@@ -216,7 +216,7 @@ function CheckAuthUserLoginStatus()  {
         $RS['errortext'] = "CheckAuthUserLoginStatus Failed";
         print_r(json_encode($RS));
         exit;
-    }  
+    }
 }
 
 function CheckAuthUserRoleHaveMenu($FlowId, $MenuPath='')  {
@@ -237,7 +237,7 @@ function CheckAuthUserRoleHaveMenu($FlowId, $MenuPath='')  {
 		}
 		$RoleArray 	= explode(',',$RoleArray);
 		$RoleArray 	= array_values($RoleArray);
-		
+
 		if($FlowId>0)    {
 			$MenuTwoId	= returntablefield("data_menutwo","FlowId",$FlowId,"id")['id'];
 			if($MenuTwoId>0 && in_array($MenuTwoId,$RoleArray))  {

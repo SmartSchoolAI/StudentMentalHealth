@@ -3,6 +3,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 require_once('config.inc.php');
 require_once('adodb5/adodb.inc.php');
+require_once('include.inc.php');
 require_once("vendor/autoload.php");
 
 
@@ -59,7 +60,7 @@ function 中学生心理健康量表_心理健康AiDeepSeek测评($测评名称,
         if($结果 != "") {
             $sql = "update data_xinlijiankang_cepingresult set DeepSeek = '".base64_encode($结果)."' where id = '".$测评结果['id']."' ";
             $db->Execute($sql);
-            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果) 
+            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果)
             values('".$测评结果['学号']."','".$测评结果['姓名']."','".$测评结果['班级']."','".$测评结果['用户名']."','$测评名称','".$测评结果['测评时间']."','DeepSeek','".base64_encode($结果)."');";
             $db->Execute($sql);
         }
@@ -120,13 +121,17 @@ function 中学生心理健康量表_中小学生心理健康量表MHTAiDeepSeek
         if($结果 != "") {
             $sql = "update data_xinlijiankang_cepingresult set DeepSeek = '".base64_encode($结果)."' where id = '".$测评结果['id']."' ";
             $db->Execute($sql);
-            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果) 
+            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果)
             values('".$测评结果['学号']."','".$测评结果['姓名']."','".$测评结果['班级']."','".$测评结果['用户名']."','$测评名称','".$测评结果['测评时间']."','DeepSeek','".base64_encode($结果)."');";
             $db->Execute($sql);
         }
 
     }
 }
+
+$File = file_get_contents("https://api.deepseek.com/chat/completions"); print_R($File);exit;
+
+中学生心理健康量表_儿童焦虑性情绪障碍筛查表SCAREDAiDeepSeek测评('儿童焦虑性情绪障碍筛查表(SCARED)', $用户名='admin', $学号='');
 
 function 中学生心理健康量表_儿童焦虑性情绪障碍筛查表SCAREDAiDeepSeek测评($测评名称, $用户名='', $学号='') {
     global $db;
@@ -159,7 +164,7 @@ function 中学生心理健康量表_儿童焦虑性情绪障碍筛查表SCAREDA
         4 给出一份500字左右的结论报告
         5 给出一份500字左右的建议和改进措施.
         ";
-        //print $系统模板;
+        print $系统模板;
         $因子分析 = (array)$测评分析['因子分析'];
         $用户输入 = "";
         foreach($因子分析 as $因子分析项目) {
@@ -175,13 +180,15 @@ function 中学生心理健康量表_儿童焦虑性情绪障碍筛查表SCAREDA
             }
             $用户输入 .= $因子记录."\n---------------\n";
         }
-        //print $用户输入;
+        print $用户输入;exit;
 
         $结果 = DeepSeekAiChat($系统模板, $用户输入);
+        print $结果;
+
         if($结果 != "") {
             $sql = "update data_xinlijiankang_cepingresult set DeepSeek = '".base64_encode($结果)."' where id = '".$测评结果['id']."' ";
             $db->Execute($sql);
-            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果) 
+            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果)
             values('".$测评结果['学号']."','".$测评结果['姓名']."','".$测评结果['班级']."','".$测评结果['用户名']."','$测评名称','".$测评结果['测评时间']."','DeepSeek','".base64_encode($结果)."');";
             $db->Execute($sql);
         }
@@ -245,7 +252,7 @@ function 中学生心理健康量表_症状自评量表SCL90AiDeepSeek测评($�
         if($结果 != "") {
             $sql = "update data_xinlijiankang_cepingresult set DeepSeek = '".base64_encode($结果)."' where id = '".$测评结果['id']."' ";
             $db->Execute($sql);
-            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果) 
+            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果)
             values('".$测评结果['学号']."','".$测评结果['姓名']."','".$测评结果['班级']."','".$测评结果['用户名']."','$测评名称','".$测评结果['测评时间']."','DeepSeek','".base64_encode($结果)."');";
             $db->Execute($sql);
         }
@@ -308,7 +315,7 @@ function 中学生心理健康量表_中学生学科兴趣测评AiDeepSeek测评
         if($结果 != "") {
             $sql = "update data_xinlijiankang_cepingresult set DeepSeek = '".base64_encode($结果)."' where id = '".$测评结果['id']."' ";
             $db->Execute($sql);
-            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果) 
+            $sql = "insert into data_xinlijiankang_airecords (学号,姓名,班级,用户名,测评名称,测评时间,AI模型,AI结果)
             values('".$测评结果['学号']."','".$测评结果['姓名']."','".$测评结果['班级']."','".$测评结果['用户名']."','$测评名称','".$测评结果['测评时间']."','DeepSeek','".base64_encode($结果)."');";
             $db->Execute($sql);
         }
@@ -318,11 +325,11 @@ function 中学生心理健康量表_中学生学科兴趣测评AiDeepSeek测评
 
 function DeepSeekAiChat($系统模板, $用户输入) {
 
-    $APIKEY     = "sk-a9b47603dce04fe6962e6626529bc21f";
-    $curl = curl_init();
+    $APIKEY     = "sk-af19f867c995411e82414d0f74ff74c5";
+    $curl       = curl_init();
     $messages = [];
-    $messages[] = ['content'=>$系统模板, 'role'=>'system'];
-    $messages[] = ['content'=>$用户输入, 'role'=>'user'];
+    $messages[] = ['content'=>$系统模板='Hi, who are you?', 'role'=>'system'];
+    $messages[] = ['content'=>$用户输入='Hi, who are you?', 'role'=>'user'];
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://api.deepseek.com/chat/completions',
         CURLOPT_RETURNTRANSFER => true,
@@ -351,8 +358,23 @@ function DeepSeekAiChat($系统模板, $用户输入) {
             'Authorization: Bearer ' . $APIKEY
         ),
     ));
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // https请求 不验证证书和hosts
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     $response = curl_exec($curl);
+
+    if ($response === false) {
+        // 获取错误码和错误信息
+        $error_code     = curl_errno($curl);
+        $error_message  = curl_error($curl);
+        // 输出错误信息
+        echo "cURL Error ($error_code): $error_message\n";
+    } else {
+        // 输出响应
+        echo $response;
+    }
+
     curl_close($curl);
+
     $JSON = json_decode($response, true);
     return $JSON['choices'][0]['message']['content'];
     //echo $response;

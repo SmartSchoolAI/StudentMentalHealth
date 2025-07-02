@@ -1,7 +1,7 @@
 <p align="center">
 	<img alt="logo" src="https://www.dandian.net/cn/wp-content/uploads/20171021044351_57.png">
 </p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">单点学生心理健康管理系统 v0.1</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">心理健康大数据平台 v0.1</h1>
 <h4 align="center">支持心理健康AI对话， 集成国产心理健康AI大模型</h4>
 
 ## 平台简介

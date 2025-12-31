@@ -1,0 +1,67 @@
+.activeSidebarListItem {
+  color: var(--mui-palette-primary-main);
+  border-inline-start: 3px solid var(--mui-palette-primary-main);
+
+  @layer utilities {
+    padding-inline-start: 1.0625rem !important;
+  }
+}
+
+.emailList {
+  transition:
+    border-block-end 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  border-block-end: 1px solid var(--mui-palette-divider);
+
+  &:hover {
+    box-shadow: var(--mui-customShadows-sm);
+    border-color: transparent;
+
+    .emailInfo:not(.show) {
+      @layer utilities {
+        display: none !important;
+      }
+    }
+
+    .emailActions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
+
+.emailActions {
+  display: none;
+}
+
+.message p:not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.message p:first-child {
+  font-weight: 500;
+}
+
+.mailReplyLayer {
+  block-size: 15px;
+  border-width: 1px 1px 0px;
+  display: block;
+  margin-inline: auto;
+  border-style: solid;
+  border-color: var(--mui-palette-divider);
+  border-start-start-radius: var(--mui-shape-borderRadius);
+  border-start-end-radius: var(--mui-shape-borderRadius);
+  background-color: var(--mui-palette-background-paper);
+  cursor: pointer;
+}
+
+.layer1 {
+  inline-size: 90%;
+  opacity: 0.5;
+}
+
+.layer2 {
+  inline-size: 95%;
+  opacity: 0.7;
+}

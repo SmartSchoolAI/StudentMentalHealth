@@ -1,0 +1,42 @@
+.kanbanColumn {
+  &:hover .drag {
+    display: block !important;
+  }
+
+  .drag {
+    display: none;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+
+.card {
+  &:hover {
+    .menu {
+      display: inline-flex !important;
+    }
+  }
+  .menu {
+    display: none !important;
+
+    &.menuOpen {
+      display: inline-flex !important;
+    }
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  inline-size: 6px;
+  block-size: 6px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: var(--mui-palette-divider);
+  border-radius: 6px;
+}

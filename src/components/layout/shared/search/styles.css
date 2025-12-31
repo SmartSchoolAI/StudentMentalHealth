@@ -1,0 +1,134 @@
+[cmdk-root] {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  inline-size: 600px;
+  block-size: 585px;
+  background-color: var(--mui-palette-background-paper);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  z-index: var(--search-z-index);
+  box-shadow: var(--mui-customShadows-xl);
+}
+[dir='rtl'] [cmdk-root] {
+  transform: translate(50%, -50%);
+}
+[dir='rtl'] [cmdk-root] {
+  transform: translate(50%, -50%);
+}
+@media (max-width: 600px) {
+  [cmdk-root] {
+    min-block-size: 100dvh;
+    max-block-size: 100dvh;
+    min-inline-size: 100dvw;
+    max-inline-size: 100dvw;
+    border-radius: 0;
+  }
+}
+[data-skin='bordered'] ~ [cmdk-dialog] [cmdk-root] {
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+}
+
+[cmdk-overlay] {
+  position: fixed;
+  inset: 0;
+  background-color: var(--backdrop-color);
+  z-index: var(--search-z-index);
+}
+
+[cmdk-input] {
+  inline-size: 100%;
+  font-size: 14px;
+  padding-block: 10px;
+  outline: none;
+  color: inherit;
+  background-color: transparent;
+}
+
+[cmdk-input]::placeholder {
+  color: #b3b2b2;
+}
+
+[cmdk-list] {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+[cmdk-list-sizer] {
+  block-size: 100%;
+}
+
+[cmdk-group-heading] {
+  padding-block: 16px 8px;
+  padding-inline: 16px;
+  letter-spacing: 0.8px;
+  color: var(--mui-palette-text-disabled);
+}
+
+[cmdk-item] {
+  cursor: pointer;
+  block-size: 38px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 16px;
+}
+
+.active-searchItem {
+  background: var(--mui-palette-primary-lightOpacity);
+  color: var(--primary-color);
+}
+
+[cmdk-item][data-selected='true'] {
+  background: var(--mui-palette-action-hover);
+}
+
+[cmdk-item][data-selected='true'].active-searchItem {
+  background: var(--mui-palette-primary-mainOpacity);
+  color: var(--primary-color);
+}
+
+[cmdk-empty],
+[cmdk-loading] {
+  font-size: 14px;
+  block-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+}
+
+[cmdk-footer] {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-block: 8px;
+  padding-inline: 16px;
+  color: var(--mui-palette-text-secondary);
+  border-block-start: 1px solid var(--border-color);
+  font-size: 12px;
+  user-select: none;
+}
+
+[cmdk-vercel-shortcuts] {
+  display: flex;
+  margin-inline-start: auto;
+  gap: 8px;
+}
+
+kbd {
+  font-size: 12px;
+  min-inline-size: 20px;
+  padding: 4px;
+  block-size: 20px;
+  border-radius: 4px;
+  background: var(--mui-palette-action-focus);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

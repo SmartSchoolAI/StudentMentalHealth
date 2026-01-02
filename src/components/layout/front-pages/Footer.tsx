@@ -20,7 +20,38 @@ import { frontLayoutClasses } from '@layouts/utils/layoutClasses'
 import styles from './styles.module.css'
 import frontCommonStyles from '@views/front-pages/styles.module.css'
 
-const Footer = () => {
+import { DecryptDataAES256GCM } from 'src/configs/functions'
+import { EncryptSchoolIdDataToServer } from 'src/configs/functions'
+
+
+// 解决本地开发时 https://localhost 证书验证问题
+if (process.env.NODE_ENV === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
+async function getFooterLinks() {
+  const SchoolId = EncryptSchoolIdDataToServer(process.env.NEXT_PUBLIC_SCHOOLID as string + "::::" + process.env.NEXT_PUBLIC_APPTYPE as string)
+
+  const res = await fetch('https://localhost:4430/api/website/info.php', {
+    method: 'GET',
+    cache: 'force-cache',
+    headers: {
+        'Content-Type': 'application/json',
+        'SchoolId': '3'
+    }
+  });
+
+  if (!res.ok) throw new Error('Failed to fetch links');
+
+  return res.json() as Promise<any[]>;
+}
+
+const Footer = async () => {
+
+  // 这行代码会在构建时运行
+  const links = await getFooterLinks();
+  console.log("links", links)
+
   return (
     <footer className={frontLayoutClasses.footer}>
       <div className='relative'>

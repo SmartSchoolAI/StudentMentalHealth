@@ -55,6 +55,7 @@
     "@tiptap/react": "3.13.0",
     "@tiptap/starter-kit": "3.13.0",
     "apexcharts": "3.49.0",
+    "base64-js": "^1.5.1",
     "bootstrap-icons": "1.13.1",
     "classnames": "2.5.1",
     "cmdk": "1.1.1",

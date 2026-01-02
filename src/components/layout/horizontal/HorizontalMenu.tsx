@@ -304,7 +304,7 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
             <MenuItem href={`/${locale}/pages/widget-examples/actions`}>{dictionary['navigation'].actions}</MenuItem>
           </SubMenu>
           <SubMenu label={dictionary['navigation'].frontPages} icon={<i className='ri-file-copy-line' />}>
-            <MenuItem href='/front-pages/landing-page' target='_blank'>
+            <MenuItem href='/home' target='_blank'>
               {dictionary['navigation'].landing}
             </MenuItem>
             <MenuItem href='/front-pages/pricing' target='_blank'>

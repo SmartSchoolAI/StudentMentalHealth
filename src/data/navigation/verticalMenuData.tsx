@@ -41,7 +41,7 @@ const verticalMenuData = (dictionary: Awaited<ReturnType<typeof getDictionary>>)
     children: [
       {
         label: dictionary['navigation'].landing,
-        href: '/front-pages/landing-page',
+        href: '/home',
         target: '_blank',
         excludeLang: true
       },

@@ -90,14 +90,14 @@ const FrontMenu = (props: Props) => {
     <Wrapper isBelowLgScreen={isBelowLgScreen} isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen}>
       <Typography
         component={Link}
-        href='/front-pages/landing-page'
+        href='/home'
         className={classnames('font-medium plb-3 pli-1.5 hover:text-primary', {
           'text-primary':
             !intersections.features &&
             !intersections.team &&
             !intersections.faq &&
             !intersections['contact-us'] &&
-            pathname === '/front-pages/landing-page'
+            pathname === '/home'
         })}
         color='text.primary'
       >
@@ -105,7 +105,7 @@ const FrontMenu = (props: Props) => {
       </Typography>
       <Typography
         component={Link}
-        href='/front-pages/landing-page#features'
+        href='/home#features'
         className={classnames('font-medium plb-3 pli-1.5 hover:text-primary', {
           'text-primary': intersections.features
         })}
@@ -115,7 +115,7 @@ const FrontMenu = (props: Props) => {
       </Typography>
       <Typography
         component={Link}
-        href='/front-pages/landing-page#team'
+        href='/home#team'
         className={classnames('font-medium plb-3 pli-1.5 hover:text-primary', {
           'text-primary': intersections.team
         })}
@@ -125,7 +125,7 @@ const FrontMenu = (props: Props) => {
       </Typography>
       <Typography
         component={Link}
-        href='/front-pages/landing-page#faq'
+        href='/home#faq'
         className={classnames('font-medium plb-3 pli-1.5 hover:text-primary', {
           'text-primary': intersections.faq
         })}
@@ -135,7 +135,7 @@ const FrontMenu = (props: Props) => {
       </Typography>
       <Typography
         component={Link}
-        href='/front-pages/landing-page#contact-us'
+        href='/home#contact-us'
         className={classnames('font-medium plb-3 pli-1.5 hover:text-primary', {
           'text-primary': intersections['contact-us']
         })}

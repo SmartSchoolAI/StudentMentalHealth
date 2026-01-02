@@ -47,7 +47,7 @@ const data: SearchData[] = [
   {
     id: '6',
     name: 'Landing Front',
-    url: '/front-pages/landing-page',
+    url: '/home',
     excludeLang: true,
     icon: 'ri-article-line',
     section: 'Front Pages'

@@ -84,7 +84,7 @@ const HeroSection = ({ mode }: { mode: Mode }) => {
           <div className='mbs-8'>
             <Button
               component={Link}
-              href='/front-pages/landing-page#pricing-plans'
+              href='/home#pricing-plans'
               variant='contained'
               color='primary'
               size='large'

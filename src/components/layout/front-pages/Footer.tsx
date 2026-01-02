@@ -20,9 +20,7 @@ import { frontLayoutClasses } from '@layouts/utils/layoutClasses'
 import styles from './styles.module.css'
 import frontCommonStyles from '@views/front-pages/styles.module.css'
 
-import { DecryptDataAES256GCM } from 'src/configs/functions'
-import { EncryptSchoolIdDataToServer } from 'src/configs/functions'
-
+import { EncryptSchoolIdDataToServer } from '@configs/functions'
 
 // 解决本地开发时 https://localhost 证书验证问题
 if (process.env.NODE_ENV === 'development') {
@@ -30,6 +28,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 async function getFooterLinks() {
+  console.log("process.env.NEXT_PUBLIC_SCHOOLID", process.env.NEXT_PUBLIC_SCHOOLID)
+  console.log("process.env.NEXT_PUBLIC_APPTYPE", process.env.NEXT_PUBLIC_APPTYPE)
   const SchoolId = EncryptSchoolIdDataToServer(process.env.NEXT_PUBLIC_SCHOOLID as string + "::::" + process.env.NEXT_PUBLIC_APPTYPE as string)
 
   const res = await fetch('https://localhost:4430/api/website/info.php', {
@@ -37,7 +37,7 @@ async function getFooterLinks() {
     cache: 'force-cache',
     headers: {
         'Content-Type': 'application/json',
-        'SchoolId': '3'
+        SchoolId
     }
   });
 
@@ -49,7 +49,8 @@ async function getFooterLinks() {
 const Footer = async () => {
 
   // 这行代码会在构建时运行
-  const links = await getFooterLinks();
+  const links: any = await getFooterLinks();
+
   console.log("links", links)
 
   return (
@@ -68,82 +69,32 @@ const Footer = async () => {
                   <Logo color='var(--mui-palette-common-white)' />
                 </Link>
                 <Typography color='white' className='lg:max-is-[390px] opacity-[0.78]'>
-                  Most Powerful & Comprehensive 🤩 React NextJS Admin Template with Elegant Material Design & Unique
-                  Layouts.
+                  {links && links['FOOTER_CONTENT']}
                 </Typography>
-                <div className='flex gap-4'>
-                  <TextField
-                    size='small'
-                    className={styles.inputBorder}
-                    label='Subscribe to newsletter'
-                    placeholder='Your email'
-                    sx={{
-                      ' & .MuiInputBase-root:hover:not(.Mui-focused) fieldset': {
-                        borderColor: 'rgb(var(--mui-mainColorChannels-dark) / 0.6) !important'
-                      },
-                      '& .MuiInputBase-root.Mui-focused fieldset': {
-                        borderColor: 'var(--mui-palette-primary-main)!important'
-                      },
-                      '& .MuiFormLabel-root.Mui-focused': {
-                        color: 'var(--mui-palette-primary-main) !important'
-                      }
-                    }}
-                  />
-                  <Button variant='contained' color='primary'>
-                    Subscribe
-                  </Button>
+              </div>
+            </Grid>
+            {links && links['status'] == 'ok' && links['data'] && links['data'].length > 0 && links['data'].map((group: any, index: number)=>(
+              <Grid size={{ xs: 12, sm: 3, lg: group['宽度'] }} key={index}>
+                <Typography color='white' className='font-medium mbe-6 opacity-[0.92]'>
+                  {group['名称']}
+                </Typography>
+                <div className='flex flex-col gap-3'>
+                  {group['链接'] && group['链接'].length > 0 && group['链接'].map((Item: any, ItemIndex: number)=>{
+
+                    return (
+                      <Typography component={Link} href={Item[1]} color='white' className='opacity-[0.78]' key={ItemIndex}>
+                        {Item[0]}
+                        {Item[3] && Item[3] == 'New' && <Chip label='New' color='primary' size='small' sx={{ml: 1}} />}
+                      </Typography>
+                    )
+                  })}
                 </div>
-              </div>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 3, lg: 2 }}>
+              </Grid>
+            ))}
+
+            <Grid size={{ xs: 12, sm: 6, lg: 2 }}>
               <Typography color='white' className='font-medium mbe-6 opacity-[0.92]'>
-                Pages
-              </Typography>
-              <div className='flex flex-col gap-4'>
-                <Typography component={Link} href='/front-pages/pricing' color='white' className='opacity-[0.78]'>
-                  Pricing
-                </Typography>
-                <Link href='/front-pages/payment' className='flex items-center gap-[10px]'>
-                  <Typography color='white' className='opacity-[0.78]'>
-                    Payment
-                  </Typography>
-                  <Chip label='New' color='primary' size='small' />
-                </Link>
-                <Typography
-                  component={Link}
-                  href='/pages/misc/under-maintenance'
-                  color='white'
-                  className='opacity-[0.78]'
-                >
-                  Maintenance
-                </Typography>
-                <Typography component={Link} href='/pages/misc/coming-soon' color='white' className='opacity-[0.78]'>
-                  Coming Soon
-                </Typography>
-              </div>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 3, lg: 2 }}>
-              <Typography color='white' className='font-medium mbe-6 opacity-[0.92]'>
-                Products
-              </Typography>
-              <div className='flex flex-col gap-4'>
-                <Typography component={Link} href='/home' color='white' className='opacity-[0.78]'>
-                  Page builder
-                </Typography>
-                <Typography component={Link} href='/home' color='white' className='opacity-[0.78]'>
-                  Admin Dashboards
-                </Typography>
-                <Typography component={Link} href='/home' color='white' className='opacity-[0.78]'>
-                  UI Kits
-                </Typography>
-                <Typography component={Link} href='/home' color='white' className='opacity-[0.78]'>
-                  Illustrations
-                </Typography>
-              </div>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Typography color='white' className='font-medium mbe-6 opacity-[0.92]'>
-                Download our App
+                下载手机APP
               </Typography>
               <div className='flex flex-col gap-4'>
                 <Link className='bg-[#211B2C] bs-[56px] is-[211px] rounded'>
@@ -151,7 +102,7 @@ const Footer = async () => {
                     <img src='/images/front-pages/apple-icon.png' alt='apple store' className='bs-[34px]' />
                     <div className='flex flex-col items-start'>
                       <Typography variant='body2' color='white' className='opacity-[0.82]'>
-                        Download on the
+                        正在开发中
                       </Typography>
                       <Typography color='white' className='font-medium opacity-[0.92]'>
                         App Store
@@ -164,7 +115,7 @@ const Footer = async () => {
                     <img src='/images/front-pages/google-play-icon.png' alt='Google play' className='bs-[34px]' />
                     <div className='flex flex-col items-start'>
                       <Typography variant='body2' color='white' className='opacity-[0.82]'>
-                        Download on the
+                        正在开发中
                       </Typography>
                       <Typography color='white' className='font-medium opacity-[0.92]'>
                         Google Play
@@ -188,27 +139,13 @@ const Footer = async () => {
             <span>{`© ${new Date().getFullYear()}, Made with `}</span>
             <span>{`❤️`}</span>
             <span>{` by `}</span>
-            <Link href='https://themeselection.com' target='_blank' className='font-medium text-white'>
-              ThemeSelection
+            <Link href={links && links['FOOTER_URL1_LINK']} target='_blank' className='font-medium text-white'>
+              {links && links['FOOTER_URL1_TEXT']}
             </Link>
           </Typography>
           <div className='flex gap-6 items-center'>
-            <IconButton component={Link} size='small' href='https://github.com/themeselection' target='_blank'>
+            <IconButton component={Link} disabled={true} size='small' href='' target='_blank'>
               <i className='ri-github-fill text-white text-lg' />
-            </IconButton>
-            <IconButton component={Link} size='small' href='https://www.facebook.com/ThemeSelections/' target='_blank'>
-              <i className='ri-facebook-fill text-white text-lg' />
-            </IconButton>
-            <IconButton component={Link} size='small' href='https://twitter.com/Theme_Selection' target='_blank'>
-              <i className='ri-twitter-fill text-white text-lg' />
-            </IconButton>
-            <IconButton
-              component={Link}
-              size='small'
-              href='https://in.linkedin.com/company/themeselection'
-              target='_blank'
-            >
-              <i className='ri-linkedin-fill text-white text-lg' />
             </IconButton>
           </div>
         </div>

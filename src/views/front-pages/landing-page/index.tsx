@@ -15,7 +15,6 @@ import Pricing from './Pricing'
 import ProductStat from './ProductStat'
 import Faqs from './Faqs'
 import GetStarted from './GetStarted'
-import ContactUs from './ContactUs'
 import { useSettings } from '@core/hooks/useSettings'
 
 const LandingPageWrapper = ({ mode }: { mode: Mode }) => {
@@ -40,7 +39,6 @@ const LandingPageWrapper = ({ mode }: { mode: Mode }) => {
       <ProductStat />
       <Faqs />
       <GetStarted />
-      <ContactUs />
     </>
   )
 }

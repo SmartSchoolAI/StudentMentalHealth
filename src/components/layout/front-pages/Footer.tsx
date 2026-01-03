@@ -32,7 +32,7 @@ async function getFooterLinks() {
   console.log("process.env.NEXT_PUBLIC_APPTYPE", process.env.NEXT_PUBLIC_APPTYPE)
   const SchoolId = EncryptSchoolIdDataToServer(process.env.NEXT_PUBLIC_SCHOOLID as string + "::::" + process.env.NEXT_PUBLIC_APPTYPE as string)
 
-  const res = await fetch('https://localhost:4430/api/website/info.php', {
+  const res = await fetch('https://demoapi.dandian.net/api/website/info.php', {
     method: 'GET',
     cache: 'force-cache',
     headers: {

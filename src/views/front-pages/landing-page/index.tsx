@@ -38,7 +38,6 @@ const LandingPageWrapper = ({ mode }: { mode: Mode }) => {
       <Pricing />
       <ProductStat />
       <Faqs />
-      <GetStarted />
     </>
   )
 }
